@@ -1,6 +1,7 @@
-package id.buaja.kmm_meal.data.remote
+package id.buaja.kmm_meal.data.source.remote
 
 import id.buaja.kmm_meal.data.remote.response.*
+import id.buaja.kmm_meal.data.source.remote.response.*
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.*

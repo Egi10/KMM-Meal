@@ -1,4 +1,4 @@
-package id.buaja.kmm_meal.data.remote.response
+package id.buaja.kmm_meal.data.source.remote.response
 
 
 import kotlinx.serialization.SerialName
