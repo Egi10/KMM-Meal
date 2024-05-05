@@ -10,7 +10,9 @@ object CoreApplication {
         modules(
             listOf(
                 platformModule,
-                networkModule
+                networkModule,
+                dispatcherModule,
+                dataSourceModule
             )
         )
     }

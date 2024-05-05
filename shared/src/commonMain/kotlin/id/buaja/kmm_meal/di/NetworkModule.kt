@@ -21,6 +21,7 @@ val networkModule = module {
         setupHttpClient(
             json = get(),
             baseUrl = get(named(BASE_URL)),
+            apiVersion = "v1",
             isDebugMode = get<Platform>().isDebugMode(),
             httpClientEngine = get()
         )

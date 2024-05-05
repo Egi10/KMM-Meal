@@ -4,7 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.*
-import io.ktor.http.URLProtocol
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -20,6 +20,7 @@ fun setupJson() = Json {
 fun setupHttpClient(
     json: Json,
     baseUrl: String,
+    apiVersion: String,
     isDebugMode: Boolean = true,
     httpClientEngine: MealHttpClientEngine
 ): HttpClient {
@@ -34,6 +35,12 @@ fun setupHttpClient(
             url {
                 this.user
                 protocol = URLProtocol.HTTPS
+
+                /**
+                 * if baseURL = themealdb.com, then by default,
+                 * the urlHttpClient will be like this: https://www.themealdb.com/api/json/v1/1/
+                 */
+                appendPathSegments("api/json/$apiVersion/1/")
             }
         }
 
