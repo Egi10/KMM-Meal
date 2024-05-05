@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.gmazzoBuildconfig)
 }
 
 kotlin {
@@ -33,6 +34,9 @@ kotlin {
         commonMain.dependencies {
             // Ktor
             implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.logging)
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
             // Serialization
@@ -40,6 +44,8 @@ kotlin {
             // Koin
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
+            // Kermit
+            implementation(libs.kermit)
         }
 
         androidMain.dependencies {
@@ -70,4 +76,14 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+buildConfig {
+    className("MealConfig")
+    packageName("id.buaja")
+
+    buildConfigField("BASE_URL", "themealdb.com")
 }
