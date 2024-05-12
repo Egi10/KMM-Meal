@@ -12,7 +12,8 @@ object CoreApplication {
                 platformModule,
                 networkModule,
                 dispatcherModule,
-                dataSourceModule
+                dataSourceModule,
+                repositoryModule
             )
         )
     }
