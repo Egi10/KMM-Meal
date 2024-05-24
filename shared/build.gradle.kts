@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.gmazzoBuildconfig)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 kotlin {
@@ -46,6 +47,14 @@ kotlin {
             implementation(libs.koin.core)
             // Kermit
             implementation(libs.kermit)
+            // Compose
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.components.resources)
+            // Voyager
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.koin)
         }
 
         androidMain.dependencies {
