@@ -13,7 +13,8 @@ object CoreApplication {
                 networkModule,
                 dispatcherModule,
                 dataSourceModule,
-                repositoryModule
+                repositoryModule,
+                useCaseModule
             )
         )
     }
