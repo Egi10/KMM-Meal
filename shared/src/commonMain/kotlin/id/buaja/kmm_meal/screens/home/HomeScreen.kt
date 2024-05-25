@@ -14,6 +14,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.*
 import id.buaja.kmm_meal.core.designsystem.component.*
 import id.buaja.kmm_meal.domain.model.FilteredMeal
+import id.buaja.kmm_meal.screens.detailsmeal.DetailsMealScreen
 import io.kamel.image.*
 import io.ktor.http.Url
 
@@ -34,7 +35,11 @@ class HomeScreen : Screen {
                 HomeContent(
                     filteredMeals = result.filteredMeals,
                     onDetailClick = {
-
+                        navigator.push(
+                            item = DetailsMealScreen(
+                                idMeal = it
+                            )
+                        )
                     }
                 )
             }

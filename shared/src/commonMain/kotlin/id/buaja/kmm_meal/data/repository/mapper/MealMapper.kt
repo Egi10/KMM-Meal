@@ -18,6 +18,7 @@ internal fun DetailMealItemResponse.asDetailMealDomainModel(): DetailMeal {
         strCategory = this.strCategory,
         strCreativeCommonsConfirmed = this.strCreativeCommonsConfirmed ?: "",
         strDrinkAlternate = this.strDrinkAlternate ?: "",
-        strImageSource = this.strImageSource ?: ""
+        strImageSource = this.strImageSource ?: this.strMealThumb,
+        strInstructions = this.strInstructions ?: ""
     )
 }

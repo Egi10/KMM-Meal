@@ -54,6 +54,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.components.resources)
+            implementation(compose.materialIconsExtended)
             // Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)

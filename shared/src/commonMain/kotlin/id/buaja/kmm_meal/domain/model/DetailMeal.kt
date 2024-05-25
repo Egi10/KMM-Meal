@@ -6,5 +6,6 @@ data class DetailMeal(
     val strCategory: String,
     val strCreativeCommonsConfirmed: String,
     val strDrinkAlternate: String,
-    val strImageSource: String
+    val strImageSource: String,
+    val strInstructions: String
 )
