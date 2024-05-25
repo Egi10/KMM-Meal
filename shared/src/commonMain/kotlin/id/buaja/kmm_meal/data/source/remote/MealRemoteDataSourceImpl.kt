@@ -4,7 +4,6 @@ import id.buaja.kmm_meal.data.source.remote.response.*
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.http.parameters
 import kotlinx.coroutines.*
 
 class MealRemoteDataSourceImpl(
@@ -15,9 +14,7 @@ class MealRemoteDataSourceImpl(
         withContext(dispatcher) {
             val response = httpClient.get("filter.php") {
                 url {
-                    parameters {
-                        append("a", areaName)
-                    }
+                    parameters.append("a", areaName)
                 }
             }.body<FilteredMealResponse>()
 
@@ -28,9 +25,7 @@ class MealRemoteDataSourceImpl(
         withContext(dispatcher) {
             val response = httpClient.get("lookup.php") {
                 url {
-                    parameters {
-                        append("i", idMeal)
-                    }
+                    parameters.append("i", idMeal)
                 }
             }.body<DetailMealResponse>()
 

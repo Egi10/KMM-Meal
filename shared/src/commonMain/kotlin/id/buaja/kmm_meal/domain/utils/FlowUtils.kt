@@ -17,6 +17,8 @@ fun <T> executeWithResultFlow(
         }
     }.onStart {
         emit(Result.Loading)
+    }.catch {
+        emit(Result.Error(it))
     }.flowOn(context)
 }
 

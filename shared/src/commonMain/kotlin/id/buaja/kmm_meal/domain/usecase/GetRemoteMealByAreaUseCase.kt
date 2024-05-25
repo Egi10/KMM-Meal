@@ -2,8 +2,7 @@ package id.buaja.kmm_meal.domain.usecase
 
 import id.buaja.kmm_meal.domain.model.FilteredMeal
 import id.buaja.kmm_meal.domain.repository.MealRepository
-import id.buaja.kmm_meal.domain.utils.Result
-import id.buaja.kmm_meal.domain.utils.executeWithResultFlow
+import id.buaja.kmm_meal.domain.utils.*
 import kotlinx.coroutines.flow.Flow
 
 class GetRemoteMealByAreaUseCase(

@@ -14,7 +14,8 @@ object CoreApplication {
                 dispatcherModule,
                 dataSourceModule,
                 repositoryModule,
-                useCaseModule
+                useCaseModule,
+                screenModelModule
             )
         )
     }

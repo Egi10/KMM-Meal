@@ -8,6 +8,8 @@ plugins {
 }
 
 kotlin {
+    task("testClasses")
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -55,6 +57,8 @@ kotlin {
             // Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)
+            // Kamel
+            implementation(libs.kamel.image)
         }
 
         androidMain.dependencies {
