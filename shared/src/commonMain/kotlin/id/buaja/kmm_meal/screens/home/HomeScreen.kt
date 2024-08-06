@@ -1,28 +1,41 @@
 package id.buaja.kmm_meal.screens.home
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentCompositeKeyHash
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.*
-import id.buaja.kmm_meal.core.designsystem.component.*
+import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import coil3.compose.AsyncImage
+import id.buaja.kmm_meal.core.designsystem.component.MealAlert
+import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.FilteredMeal
 import id.buaja.kmm_meal.screens.detailsmeal.DetailsMealScreen
-import io.kamel.image.*
-import io.ktor.http.Url
 
 class HomeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val homeScreenModel = getScreenModel<HomeScreenModel>()
+        val homeScreenModel = koinScreenModel<HomeScreenModel>()
 
         val state by homeScreenModel.uiState.collectAsState()
 
@@ -94,14 +107,12 @@ private fun HomeContent(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                KamelImage(
-                    resource = asyncPainterResource(
-                        Url(it.strMealThumb)
-                    ),
-                    contentDescription = "MealThumb",
+                AsyncImage(
                     modifier = Modifier
                         .size(64.dp)
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(8.dp)),
+                    model = it.strMealThumb,
+                    contentDescription = it.strMeal
                 )
 
                 Text(

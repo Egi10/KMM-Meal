@@ -1,21 +1,40 @@
 package id.buaja.kmm_meal.screens.detailsmeal
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIosNew
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentCompositeKeyHash
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.*
-import id.buaja.kmm_meal.core.designsystem.component.*
+import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import coil3.compose.AsyncImage
+import id.buaja.kmm_meal.core.designsystem.component.MealAlert
+import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.DetailMeal
-import io.kamel.image.*
-import io.ktor.http.Url
 
 data class DetailsMealScreen(
     val idMeal: String
@@ -24,7 +43,7 @@ data class DetailsMealScreen(
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val detailScreenModel = getScreenModel<DetailsMealScreenModel>()
+        val detailScreenModel = koinScreenModel<DetailsMealScreenModel>()
 
         val state by detailScreenModel.state.collectAsState()
 
@@ -101,11 +120,13 @@ fun DetailsMealContent(
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        KamelImage(
-            resource = asyncPainterResource(
-                Url(detailMeal.strImageSource)
-            ),
-            contentDescription = "MealThumb"
+        AsyncImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp)),
+            model = detailMeal.strImageSource,
+            contentDescription = detailMeal.idMeal,
+            contentScale = ContentScale.Crop
         )
 
         Spacer(
