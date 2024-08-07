@@ -48,6 +48,7 @@ kotlin {
             // Koin
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
+            implementation(libs.koin.compose.viewmodel)
             // Kermit
             implementation(libs.kermit)
             // Compose
@@ -58,11 +59,14 @@ kotlin {
             implementation(compose.materialIconsExtended)
             // Voyager
             implementation(libs.voyager.navigator)
-            implementation(libs.voyager.koin)
+            implementation(libs.voyager.lifecycle.kmp)
+            implementation(libs.voyager.transitions)
             // Coil
             implementation(libs.coil)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            // ViewModel
+            implementation(libs.lifecycle.viewmodel.compose)
         }
 
         androidMain.dependencies {

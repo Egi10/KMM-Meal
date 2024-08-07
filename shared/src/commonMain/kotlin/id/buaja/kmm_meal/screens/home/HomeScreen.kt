@@ -12,17 +12,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.currentCompositeKeyHash
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
@@ -30,14 +29,16 @@ import id.buaja.kmm_meal.core.designsystem.component.MealAlert
 import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.FilteredMeal
 import id.buaja.kmm_meal.screens.detailsmeal.DetailsMealScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 class HomeScreen : Screen {
+    @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val homeScreenModel = koinScreenModel<HomeScreenModel>()
+        val viewModel = koinViewModel<HomeViewModel>()
 
-        val state by homeScreenModel.uiState.collectAsState()
+        val state by viewModel.uiState.collectAsStateWithLifecycle()
 
         when (val result = state) {
             is HomeState.Loading -> {
@@ -63,14 +64,14 @@ class HomeScreen : Screen {
                     message = result.message,
                     buttonText = "Retry",
                     onButtonClick = {
-                        homeScreenModel.getMealByArea()
+                        viewModel.getMealByArea()
                     }
                 )
             }
         }
 
-        LaunchedEffect(currentCompositeKeyHash) {
-            homeScreenModel.getMealByArea()
+        LifecycleEffectOnce {
+            viewModel.getMealByArea()
         }
     }
 }

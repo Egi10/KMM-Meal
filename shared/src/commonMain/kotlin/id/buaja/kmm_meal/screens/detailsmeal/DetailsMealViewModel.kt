@@ -1,32 +1,38 @@
 package id.buaja.kmm_meal.screens.detailsmeal
 
-import cafe.adriel.voyager.core.model.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import id.buaja.kmm_meal.domain.usecase.GetRemoteDetailMealByIdUseCase
 import id.buaja.kmm_meal.domain.utils.Result
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class DetailsMealScreenModel(
+class DetailsMealViewModel(
     private val getRemoteDetailMealByIdUseCase: GetRemoteDetailMealByIdUseCase
-) : StateScreenModel<DetailsMealState>(DetailsMealState.Loading) {
+) : ViewModel() {
+    private val _uiState: MutableStateFlow<DetailsMealState> = MutableStateFlow(DetailsMealState.Loading)
+    val uiState get() = _uiState.asStateFlow()
+
     fun getDetailByIdeMeal(idMeal: String) {
-        screenModelScope.launch {
+        viewModelScope.launch {
             getRemoteDetailMealByIdUseCase.invoke(
                 idMeal = idMeal
             ).collectLatest {
                 when (it) {
                     Result.Loading -> {
-                        mutableState.value = DetailsMealState.Loading
+                        _uiState.value = DetailsMealState.Loading
                     }
 
                     is Result.Success -> {
-                        mutableState.value = DetailsMealState.Success(
+                        _uiState.value = DetailsMealState.Success(
                             data = it.data
                         )
                     }
 
                     is Result.Error -> {
-                        mutableState.value = DetailsMealState.Error(
+                        _uiState.value = DetailsMealState.Error(
                             message = it.exception.message ?: ""
                         )
                     }

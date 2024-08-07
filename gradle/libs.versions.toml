@@ -1,6 +1,6 @@
 [versions]
 agp = "8.4.2"
-kotlin = "2.0.0"
+kotlin = "2.0.10"
 compose-plugin = "1.6.11"
 androidx-activityCompose = "1.9.1"
 jetpack-compose-bom = "2024.06.00"
@@ -12,6 +12,7 @@ kermit = "2.0.4"
 gmazzo-buildconfig = "5.4.0"
 voyager = "1.1.0-beta02"
 coil3 = "3.0.0-alpha09"
+compose-viewModel = "2.8.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -30,12 +31,15 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+voyager-lifecycle-kmp = { module = "cafe.adriel.voyager:voyager-lifecycle-kmp", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
 coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose-viewModel" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

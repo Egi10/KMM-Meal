@@ -17,9 +17,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.currentCompositeKeyHash
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,15 +24,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.lifecycle.LifecycleEffectOnce
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import id.buaja.kmm_meal.core.designsystem.component.MealAlert
 import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.DetailMeal
+import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalVoyagerApi::class)
 data class DetailsMealScreen(
     val idMeal: String
 ) : Screen {
@@ -43,9 +44,9 @@ data class DetailsMealScreen(
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val detailScreenModel = koinScreenModel<DetailsMealScreenModel>()
+        val viewModel = koinViewModel<DetailsMealViewModel>()
 
-        val state by detailScreenModel.state.collectAsState()
+        val state by viewModel.uiState.collectAsStateWithLifecycle()
 
         Column(
             modifier = Modifier
@@ -92,7 +93,7 @@ data class DetailsMealScreen(
                         message = result.message,
                         buttonText = "Retry",
                         onButtonClick = {
-                            detailScreenModel.getDetailByIdeMeal(
+                            viewModel.getDetailByIdeMeal(
                                 idMeal = idMeal
                             )
                         }
@@ -101,8 +102,8 @@ data class DetailsMealScreen(
             }
         }
 
-        LaunchedEffect(currentCompositeKeyHash) {
-            detailScreenModel.getDetailByIdeMeal(
+        LifecycleEffectOnce {
+            viewModel.getDetailByIdeMeal(
                 idMeal = idMeal
             )
         }

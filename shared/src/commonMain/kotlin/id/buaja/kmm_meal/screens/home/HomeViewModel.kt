@@ -1,19 +1,20 @@
 package id.buaja.kmm_meal.screens.home
 
-import cafe.adriel.voyager.core.model.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import id.buaja.kmm_meal.domain.usecase.GetRemoteMealByAreaUseCase
 import id.buaja.kmm_meal.domain.utils.Result
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class HomeScreenModel(
+class HomeViewModel(
     private val getRemoteMealByAreaUseCase: GetRemoteMealByAreaUseCase
-) : ScreenModel {
+) : ViewModel() {
     private val _uiState: MutableStateFlow<HomeState> = MutableStateFlow(HomeState.Loading)
     val uiState get() = _uiState.asStateFlow()
 
     fun getMealByArea() {
-        screenModelScope.launch {
+        viewModelScope.launch {
             getRemoteMealByAreaUseCase.invoke(
                 areaName = "Japanese"
             ).collect { result ->
