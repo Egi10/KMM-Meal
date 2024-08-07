@@ -108,3 +108,9 @@ buildConfig {
 
     buildConfigField("BASE_URL", "themealdb.com")
 }
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "id.buaja.kmm_meal.resources"
+    generateResClass = always
+}

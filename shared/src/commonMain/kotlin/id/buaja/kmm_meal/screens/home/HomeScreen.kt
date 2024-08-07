@@ -28,7 +28,11 @@ import coil3.compose.AsyncImage
 import id.buaja.kmm_meal.core.designsystem.component.MealAlert
 import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.FilteredMeal
+import id.buaja.kmm_meal.resources.Res
+import id.buaja.kmm_meal.resources.ops
+import id.buaja.kmm_meal.resources.retry
 import id.buaja.kmm_meal.screens.detailsmeal.DetailsMealScreen
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 class HomeScreen : Screen {
@@ -60,9 +64,13 @@ class HomeScreen : Screen {
 
             is HomeState.Error -> {
                 MealAlert(
-                    title = "Ops!",
+                    title = stringResource(
+                        resource = Res.string.ops
+                    ),
                     message = result.message,
-                    buttonText = "Retry",
+                    buttonText = stringResource(
+                        resource = Res.string.retry
+                    ),
                     onButtonClick = {
                         viewModel.getMealByArea()
                     }

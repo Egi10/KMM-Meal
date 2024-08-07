@@ -34,6 +34,16 @@ import coil3.compose.AsyncImage
 import id.buaja.kmm_meal.core.designsystem.component.MealAlert
 import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.DetailMeal
+import id.buaja.kmm_meal.resources.Res
+import id.buaja.kmm_meal.resources.area
+import id.buaja.kmm_meal.resources.category
+import id.buaja.kmm_meal.resources.creative_commons_confirme
+import id.buaja.kmm_meal.resources.details_meal
+import id.buaja.kmm_meal.resources.drink_alternate
+import id.buaja.kmm_meal.resources.instructions
+import id.buaja.kmm_meal.resources.ops
+import id.buaja.kmm_meal.resources.retry
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalVoyagerApi::class)
@@ -70,7 +80,9 @@ data class DetailsMealScreen(
                 }
 
                 Text(
-                    text = "Details Meal",
+                    text = stringResource(
+                        resource = Res.string.details_meal
+                    ),
                     style = MaterialTheme.typography.subtitle1,
                     fontWeight = FontWeight.Bold
                 )
@@ -89,9 +101,13 @@ data class DetailsMealScreen(
 
                 is DetailsMealState.Error -> {
                     MealAlert(
-                        title = "Ops!",
+                        title = stringResource(
+                            resource = Res.string.ops
+                        ),
                         message = result.message,
-                        buttonText = "Retry",
+                        buttonText = stringResource(
+                            resource = Res.string.retry
+                        ),
                         onButtonClick = {
                             viewModel.getDetailByIdeMeal(
                                 idMeal = idMeal
@@ -136,12 +152,22 @@ fun DetailsMealContent(
         )
 
         Text(
-            text = "Area: ${detailMeal.strArea}",
+            text = stringResource(
+                resource = Res.string.area,
+                formatArgs = arrayOf(
+                    detailMeal.strArea
+                )
+            ),
             style = MaterialTheme.typography.h6
         )
 
         Text(
-            text = "Category: ${detailMeal.strCategory}",
+            text = stringResource(
+                resource = Res.string.category,
+                formatArgs = arrayOf(
+                    detailMeal.strCategory
+                )
+            ),
             style = MaterialTheme.typography.body1
         )
 
@@ -149,7 +175,12 @@ fun DetailsMealContent(
 
         if (detailMeal.strInstructions.isNotEmpty()) {
             Text(
-                text = "Instructions: ${detailMeal.strInstructions}",
+                text = stringResource(
+                    resource = Res.string.instructions,
+                    formatArgs = arrayOf(
+                        detailMeal.strInstructions
+                    )
+                ),
                 style = MaterialTheme.typography.body2
             )
         }
@@ -158,7 +189,12 @@ fun DetailsMealContent(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Creative Commons Confirmed: ${detailMeal.strCreativeCommonsConfirmed}",
+                text = stringResource(
+                    resource = Res.string.creative_commons_confirme,
+                    formatArgs = arrayOf(
+                        detailMeal.strCreativeCommonsConfirmed
+                    )
+                ),
                 style = MaterialTheme.typography.body2
             )
         }
@@ -167,7 +203,12 @@ fun DetailsMealContent(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Drink Alternate: ${detailMeal.strDrinkAlternate}",
+                text = stringResource(
+                    resource = Res.string.drink_alternate,
+                    formatArgs = arrayOf(
+                        detailMeal.strDrinkAlternate
+                    )
+                ),
                 style = MaterialTheme.typography.body2
             )
         }

@@ -1,0 +1,10 @@
+<resources>
+    <string name="ops">Ops!</string>
+    <string name="retry">Retry</string>
+    <string name="details_meal">Details Meal</string>
+    <string name="area">Area: %1$s</string>
+    <string name="category">Category: %1$s</string>
+    <string name="instructions">Instructions: %1$s</string>
+    <string name="creative_commons_confirme">Creative Commons Confirme: %1$s</string>
+    <string name="drink_alternate">Drink Alternate: %1$s</string>
+</resources>
