@@ -27,7 +27,7 @@ class SplashScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        
+
         SplashContent(
             modifier = Modifier
                 .fillMaxSize(),
