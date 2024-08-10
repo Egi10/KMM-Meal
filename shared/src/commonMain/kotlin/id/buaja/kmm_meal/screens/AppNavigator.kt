@@ -6,14 +6,14 @@ import cafe.adriel.voyager.jetpack.ProvideNavigatorLifecycleKMPSupport
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.transitions.SlideTransition
-import id.buaja.kmm_meal.screens.home.HomeScreen
+import id.buaja.kmm_meal.screens.splashscreen.SplashScreen
 
 @OptIn(ExperimentalVoyagerApi::class)
 @Composable
 internal fun AppNavigator() {
     ProvideNavigatorLifecycleKMPSupport {
         Navigator(
-            screen = HomeScreen(),
+            screen = SplashScreen(),
             disposeBehavior = NavigatorDisposeBehavior(disposeSteps = true)
         ) { navigator ->
             SlideTransition(

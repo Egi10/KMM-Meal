@@ -67,6 +67,8 @@ kotlin {
             implementation(libs.coil.network.ktor)
             // ViewModel
             implementation(libs.lifecycle.viewmodel.compose)
+            // Compottie
+            implementation(libs.compottie)
         }
 
         androidMain.dependencies {
