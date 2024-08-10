@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,6 +33,7 @@ import id.buaja.kmm_meal.resources.Res
 import id.buaja.kmm_meal.resources.ops
 import id.buaja.kmm_meal.resources.retry
 import id.buaja.kmm_meal.screens.detailsmeal.DetailsMealScreen
+import id.buaja.kmm_meal.screens.utils.findRootNavigator
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -39,7 +41,12 @@ class HomeScreen : Screen {
     @OptIn(ExperimentalVoyagerApi::class)
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+        val currentNavigator = LocalNavigator.currentOrThrow
+        val targetNavigator = findRootNavigator(
+            currentNavigator = currentNavigator,
+            depth = 2
+        )
+
         val viewModel = koinViewModel<HomeViewModel>()
 
         val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -51,9 +58,11 @@ class HomeScreen : Screen {
 
             is HomeState.Success -> {
                 HomeContent(
+                    modifier = Modifier
+                        .fillMaxSize(),
                     filteredMeals = result.filteredMeals,
                     onDetailClick = {
-                        navigator.push(
+                        targetNavigator.push(
                             item = DetailsMealScreen(
                                 idMeal = it
                             )

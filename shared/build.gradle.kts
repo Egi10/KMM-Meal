@@ -61,6 +61,7 @@ kotlin {
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.lifecycle.kmp)
             implementation(libs.voyager.transitions)
+            implementation(libs.voyager.tab.navigator)
             // Coil
             implementation(libs.coil)
             implementation(libs.coil.compose)

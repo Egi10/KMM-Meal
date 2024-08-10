@@ -11,17 +11,12 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import id.buaja.kmm_meal.resources.Res
-import id.buaja.kmm_meal.screens.home.HomeScreen
+import id.buaja.kmm_meal.screens.dashboard.DashboardScreen
 import io.github.alexzhirkevich.compottie.LottieCompositionSpec
 import io.github.alexzhirkevich.compottie.animateLottieCompositionAsState
 import io.github.alexzhirkevich.compottie.rememberLottieComposition
 import io.github.alexzhirkevich.compottie.rememberLottiePainter
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-
-/**
- * Created by Julsapargi Nursam on 10/08/24
- * Mobile Engineer - Android
- */
 
 class SplashScreen : Screen {
     @Composable
@@ -33,7 +28,7 @@ class SplashScreen : Screen {
                 .fillMaxSize(),
             onFinishLottie = {
                 navigator.push(
-                    item = HomeScreen()
+                    item = DashboardScreen()
                 )
             }
         )

@@ -37,6 +37,7 @@ kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-lifecycle-kmp = { module = "cafe.adriel.voyager:voyager-lifecycle-kmp", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-tab-navigator = {module= "cafe.adriel.voyager:voyager-tab-navigator", version.ref="voyager"}
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
 coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
