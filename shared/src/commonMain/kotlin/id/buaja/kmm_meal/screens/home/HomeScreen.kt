@@ -30,11 +30,14 @@ import id.buaja.kmm_meal.core.designsystem.component.MealAlert
 import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.FilteredMeal
 import id.buaja.kmm_meal.resources.Res
+import id.buaja.kmm_meal.resources.img_no_available
 import id.buaja.kmm_meal.resources.ops
 import id.buaja.kmm_meal.resources.retry
 import id.buaja.kmm_meal.screens.detailsmeal.DetailsMealScreen
 import id.buaja.kmm_meal.screens.utils.findRootNavigator
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 class HomeScreen : Screen {
@@ -130,7 +133,13 @@ private fun HomeContent(
                         .size(64.dp)
                         .clip(RoundedCornerShape(8.dp)),
                     model = it.strMealThumb,
-                    contentDescription = it.strMeal
+                    contentDescription = it.strMeal,
+                    placeholder = painterResource(
+                        resource = Res.drawable.img_no_available
+                    ),
+                    error = painterResource(
+                        resource = Res.drawable.img_no_available
+                    )
                 )
 
                 Text(
@@ -140,4 +149,20 @@ private fun HomeContent(
             }
         }
     }
+}
+
+@Composable
+@Preview
+private fun HomeContentPreview() {
+    val dummyMeal =  (0..5).map { index ->
+        FilteredMeal(
+            idMeal = "1343$index",
+            strMeal = "Meal - $index",
+            strMealThumb = "image"
+        )
+    }
+    HomeContent(
+        filteredMeals = dummyMeal,
+        onDetailClick = {}
+    )
 }

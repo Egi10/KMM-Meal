@@ -57,6 +57,7 @@ kotlin {
             implementation(compose.material)
             implementation(compose.components.resources)
             implementation(compose.materialIconsExtended)
+            implementation(compose.components.uiToolingPreview)
             // Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.lifecycle.kmp)

@@ -34,16 +34,10 @@ import coil3.compose.AsyncImage
 import id.buaja.kmm_meal.core.designsystem.component.MealAlert
 import id.buaja.kmm_meal.core.designsystem.component.MealLoading
 import id.buaja.kmm_meal.domain.model.DetailMeal
-import id.buaja.kmm_meal.resources.Res
-import id.buaja.kmm_meal.resources.area
-import id.buaja.kmm_meal.resources.category
-import id.buaja.kmm_meal.resources.creative_commons_confirme
-import id.buaja.kmm_meal.resources.details_meal
-import id.buaja.kmm_meal.resources.drink_alternate
-import id.buaja.kmm_meal.resources.instructions
-import id.buaja.kmm_meal.resources.ops
-import id.buaja.kmm_meal.resources.retry
+import id.buaja.kmm_meal.resources.*
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalVoyagerApi::class)
@@ -127,7 +121,7 @@ data class DetailsMealScreen(
 }
 
 @Composable
-fun DetailsMealContent(
+internal fun DetailsMealContent(
     detailMeal: DetailMeal,
     modifier: Modifier = Modifier
 ) {
@@ -143,7 +137,13 @@ fun DetailsMealContent(
                 .clip(RoundedCornerShape(8.dp)),
             model = detailMeal.strImageSource,
             contentDescription = detailMeal.idMeal,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            placeholder = painterResource(
+                resource = Res.drawable.img_no_available
+            ),
+            error = painterResource(
+                resource = Res.drawable.img_no_available
+            )
         )
 
         Spacer(
@@ -213,4 +213,31 @@ fun DetailsMealContent(
             )
         }
     }
+}
+
+@Composable
+@Preview
+private fun DetailsMealContentPreview() {
+    DetailsMealContent(
+        detailMeal = DetailMeal(
+            idMeal = "2",
+            strArea = "Asian",
+            strCategory = "Soup",
+            strCreativeCommonsConfirmed = "Yes",
+            strDrinkAlternate = "Green Tea",
+            strImageSource = "https://example.com/image2.png",
+            strInstructions = """
+                Siapkan bahan-bahan:
+                * 1 kg daging sapi
+                * 2 buah bawang bombay
+                * 3 siung bawang putih
+
+                Tumis bawang bombay dan bawang putih hingga harum. Masukkan daging sapi,
+                masak hingga berubah warna. Tambahkan air, kecap manis, dan bumbu lainnya.
+                Masak hingga daging empuk dan kuah menyusut.
+
+                Sajikan selagi hangat dengan nasi putih.
+            """.trimIndent()
+        )
+    )
 }
