@@ -69,6 +69,7 @@ kotlin {
             implementation(libs.coil.network.ktor)
             // ViewModel
             implementation(libs.lifecycle.viewmodel.compose)
+            implementation(libs.lifecycle.runtime.compose)
             // Compottie
             implementation(libs.compottie)
         }
